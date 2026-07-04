@@ -9,6 +9,7 @@ export interface Bookmark {
   faviconUrl: string;
   createdAt: number;
   matches?: any[];
+  pinned?: boolean;
 }
 
 export interface Collection {
@@ -24,7 +25,7 @@ export interface LinkMindExport {
   exportDate: string;
 }
 
-export type ViewMode = 'grid' | 'list' | 'mindmap' | 'chatbot';
+export type ViewMode = 'home' | 'grid' | 'list' | 'mindmap' | 'chatbot';
 export type SortOption = 'newest' | 'oldest' | 'title' | 'category' | 'status';
 export type Category = Bookmark['category'];
 export type Status = Bookmark['status'];

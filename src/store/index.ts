@@ -119,7 +119,7 @@ export const useLinkMindStore = create<LinkMindState>((set, get) => ({
   // ---- initial state ----
   bookmarks: [],
   collections: [],
-  viewMode: 'grid',
+  viewMode: 'home',
   sortOption: 'newest',
   filters: { ...defaultFilters },
   selectedBookmarkIds: new Set<string>(),
@@ -155,11 +155,17 @@ export const useLinkMindStore = create<LinkMindState>((set, get) => ({
   },
 
   async addBookmark(input) {
+    const isPinned = input.pinned || input.tags?.includes('pinned') || false;
+    const tags = isPinned
+      ? [...(input.tags || []).filter((t) => t !== 'pinned'), 'pinned']
+      : (input.tags || []).filter((t) => t !== 'pinned');
     const bookmark: Bookmark = {
       ...input,
       id: crypto.randomUUID(),
       faviconUrl: getFaviconUrl(input.url),
       createdAt: Date.now(),
+      pinned: isPinned,
+      tags,
     };
     try {
       await db.bookmarks.add(bookmark);
@@ -173,13 +179,28 @@ export const useLinkMindStore = create<LinkMindState>((set, get) => ({
 
   async updateBookmark(id, updates) {
     try {
-      // If the URL changed, refresh the favicon
-      if (updates.url) {
-        updates.faviconUrl = getFaviconUrl(updates.url);
+      const existing = get().bookmarks.find((b) => b.id === id);
+      if (!existing) return;
+
+      const finalUpdates = { ...updates };
+      const newTags = updates.tags !== undefined ? updates.tags : existing.tags;
+      const hasPinnedTag = newTags.includes('pinned');
+      
+      if (updates.pinned !== undefined || updates.tags !== undefined) {
+        const isPinnedNow = updates.pinned !== undefined ? updates.pinned : hasPinnedTag;
+        finalUpdates.pinned = isPinnedNow;
+        finalUpdates.tags = isPinnedNow
+          ? [...newTags.filter((t) => t !== 'pinned'), 'pinned']
+          : newTags.filter((t) => t !== 'pinned');
       }
-      await db.bookmarks.update(id, updates);
+
+      if (updates.url) {
+        finalUpdates.faviconUrl = getFaviconUrl(updates.url);
+      }
+      
+      await db.bookmarks.update(id, finalUpdates);
       set((s) => ({
-        bookmarks: s.bookmarks.map((b) => (b.id === id ? { ...b, ...updates } : b)),
+        bookmarks: s.bookmarks.map((b) => (b.id === id ? { ...b, ...finalUpdates } : b)),
       }));
       toast.success('Bookmark updated');
     } catch (err) {

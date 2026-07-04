@@ -11,16 +11,23 @@ import {
   SlidersHorizontal,
   Settings,
   MessageSquare,
+  Home,
+  BookOpen,
 } from 'lucide-react';
 import { useLinkMindStore } from '../store';
 import type { ViewMode, SortOption } from '../types';
 
 const viewOptions: { mode: ViewMode; icon: typeof LayoutGrid; label: string }[] = [
-  { mode: 'grid', icon: LayoutGrid, label: 'Grid' },
-  { mode: 'list', icon: List, label: 'List' },
+  { mode: 'home', icon: Home, label: 'Home' },
+  { mode: 'grid', icon: BookOpen, label: 'Library' },
   { mode: 'mindmap', icon: Network, label: 'Mind Map' },
   { mode: 'chatbot', icon: MessageSquare, label: 'AI Chat' },
 ];
+
+/** Check if viewMode is a library mode (grid or list) */
+function isLibraryMode(mode: ViewMode): boolean {
+  return mode === 'grid' || mode === 'list';
+}
 
 const sortOptions: { value: SortOption; label: string }[] = [
   { value: 'newest', label: 'Newest' },
@@ -160,26 +167,57 @@ export default function Header({ onToggleSidebar, onOpenSettings }: HeaderProps)
 
         {/* View Toggle */}
         <div className="flex items-center bg-surface-200/80 rounded-xl border border-glass-border p-0.5">
-          {viewOptions.map(({ mode, icon: Icon, label }) => (
-            <motion.button
-              key={mode}
-              onClick={() => setViewMode(mode)}
-              className={`relative p-2 rounded-lg transition-colors ${
-                viewMode === mode ? 'text-white' : 'text-surface-600 hover:text-surface-700'
-              }`}
-              title={label}
-            >
-              {viewMode === mode && (
-                <motion.div
-                  layoutId="viewToggle"
-                  className="absolute inset-0 bg-accent-primary rounded-lg"
-                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                />
-              )}
-              <Icon className="w-4 h-4 relative z-10" />
-            </motion.button>
-          ))}
+          {viewOptions.map(({ mode, icon: Icon, label }) => {
+            const isActive = viewMode === mode || (mode === 'grid' && viewMode === 'list');
+            return (
+              <motion.button
+                key={mode}
+                onClick={() => setViewMode(mode)}
+                className={`relative p-2 rounded-lg transition-colors ${
+                  isActive ? 'text-white' : 'text-surface-600 hover:text-surface-700'
+                }`}
+                title={label}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="viewToggle"
+                    className="absolute inset-0 bg-accent-primary rounded-lg"
+                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                  />
+                )}
+                <Icon className="w-4 h-4 relative z-10" />
+              </motion.button>
+            );
+          })}
         </div>
+
+        {/* Grid / List sub-toggle (visible only in Library mode) */}
+        {isLibraryMode(viewMode) && (
+          <div className="flex items-center bg-surface-200/80 rounded-lg border border-glass-border p-0.5 gap-0.5">
+            <button
+              onClick={() => setViewMode('grid')}
+              className={`p-1.5 rounded-md transition-colors ${
+                viewMode === 'grid'
+                  ? 'bg-surface-400 text-surface-950'
+                  : 'text-surface-500 hover:text-surface-700'
+              }`}
+              title="Grid view"
+            >
+              <LayoutGrid className="w-3.5 h-3.5" />
+            </button>
+            <button
+              onClick={() => setViewMode('list')}
+              className={`p-1.5 rounded-md transition-colors ${
+                viewMode === 'list'
+                  ? 'bg-surface-400 text-surface-950'
+                  : 'text-surface-500 hover:text-surface-700'
+              }`}
+              title="List view"
+            >
+              <List className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        )}
 
         {/* Settings Toggle */}
         <button

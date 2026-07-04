@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Pencil, Copy, Trash2 } from 'lucide-react';
+import { ExternalLink, Pencil, Copy, Trash2, Pin } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { useLinkMindStore } from '../store';
 import type { Bookmark } from '../types';
@@ -25,9 +25,10 @@ export default function ContextMenu({
 }: ContextMenuProps) {
   const openEditModal = useLinkMindStore((s) => s.openEditModal);
   const deleteBookmark = useLinkMindStore((s) => s.deleteBookmark);
+  const updateBookmark = useLinkMindStore((s) => s.updateBookmark);
   const menuRef = useRef<HTMLDivElement>(null);
   const [clamped, setClamped] = useState(position);
-
+  
   // Clamp position to viewport once the menu is rendered
   useEffect(() => {
     const menu = menuRef.current;
@@ -75,6 +76,14 @@ export default function ContextMenu({
       icon: <ExternalLink size={14} />,
       action: () => {
         window.open(bookmark.url, '_blank');
+        onClose();
+      },
+    },
+    {
+      label: bookmark.pinned ? 'Unpin' : 'Pin',
+      icon: <Pin size={14} />,
+      action: () => {
+        void updateBookmark(bookmark.id, { pinned: !bookmark.pinned });
         onClose();
       },
     },

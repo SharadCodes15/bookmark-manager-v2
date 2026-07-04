@@ -5,6 +5,7 @@ import { useLinkMindStore } from './store';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
+import HomeScreen from './components/HomeScreen';
 import AddEditModal from './components/AddEditModal';
 import FloatingAddButton from './components/FloatingAddButton';
 import MindMap from './components/MindMap';
@@ -119,13 +120,23 @@ function App() {
       />
 
       <div className="flex flex-1 overflow-hidden">
-        {viewMode !== 'mindmap' && viewMode !== 'chatbot' && (
+        {viewMode !== 'home' && viewMode !== 'mindmap' && viewMode !== 'chatbot' && (
           <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
         )}
 
         <main className="flex-1 overflow-hidden flex flex-col">
           <AnimatePresence mode="wait">
-            {viewMode === 'mindmap' ? (
+            {viewMode === 'home' ? (
+              <motion.div
+                key="home"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="flex-1 overflow-y-auto"
+              >
+                <HomeScreen />
+              </motion.div>
+            ) : viewMode === 'mindmap' ? (
               <motion.div
                 key="mindmap"
                 initial={{ opacity: 0 }}

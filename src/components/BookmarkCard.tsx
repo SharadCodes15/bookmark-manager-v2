@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Pin } from 'lucide-react';
 import { useLinkMindStore } from '../store';
 import { getDomain, cn } from '../utils';
 import type { Bookmark } from '../types';
@@ -84,6 +85,11 @@ export default function BookmarkCard({
         isSelected && 'ring-2 ring-accent-primary/60'
       )}
     >
+      {/* Pinned Icon Indicator */}
+      {bookmark.pinned && (
+        <Pin className="absolute top-3.5 right-8 w-3.5 h-3.5 text-accent-secondary shrink-0" />
+      )}
+
       {/* Selection checkbox */}
       <label
         className={cn(

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Pencil, Trash2, ExternalLink } from 'lucide-react';
+import { Pencil, Trash2, ExternalLink, Pin } from 'lucide-react';
 import { useLinkMindStore } from '../store';
 import { getDomain, cn } from '../utils';
 import type { Bookmark } from '../types';
@@ -80,6 +80,9 @@ export default function BookmarkListItem({
         <span className="font-semibold text-sm text-surface-950 truncate">
           <Highlight text={bookmark.title} matches={bookmark.matches} matchKey="title" />
         </span>
+        {bookmark.pinned && (
+          <Pin className="w-3.5 h-3.5 text-accent-secondary shrink-0" />
+        )}
         <span className="text-xs text-surface-600 truncate hidden sm:inline">
           <Highlight text={getDomain(bookmark.url)} matches={bookmark.matches} matchKey="url" />
         </span>
