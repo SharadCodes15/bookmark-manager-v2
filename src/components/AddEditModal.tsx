@@ -171,13 +171,22 @@ export default function AddEditModal() {
       setCollectionId(editingBookmark.collectionId);
       urlTitleSynced.current = false;
     } else {
-      setUrl('');
-      setTitle('');
+      const searchParams = new URLSearchParams(window.location.search);
+      const qaUrl = searchParams.get('url');
+      const qaTitle = searchParams.get('title');
+      if (searchParams.get('quickadd') === '1' && qaUrl) {
+        setUrl(qaUrl);
+        setTitle(qaTitle || '');
+        urlTitleSynced.current = false;
+      } else {
+        setUrl('');
+        setTitle('');
+        urlTitleSynced.current = true;
+      }
       setCategory('Project');
       setStatus('To Read');
       setTags([]);
       setCollectionId(undefined);
-      urlTitleSynced.current = true;
     }
     setTagInput('');
     setShowCollectionDropdown(false);
@@ -186,6 +195,21 @@ export default function AddEditModal() {
     setNewCollectionColor(PRESET_COLORS[0]);
     setIsSaving(false);
   }, [isAddModalOpen, editingBookmark]);
+
+  // ── Clear quick-add parameters from URL on unmount ───────────────
+  useEffect(() => {
+    return () => {
+      const searchParams = new URLSearchParams(window.location.search);
+      if (searchParams.get('quickadd') === '1') {
+        searchParams.delete('quickadd');
+        searchParams.delete('url');
+        searchParams.delete('title');
+        const newSearch = searchParams.toString();
+        const newUrl = window.location.pathname + (newSearch ? `?${newSearch}` : '') + window.location.hash;
+        window.history.replaceState({}, '', newUrl);
+      }
+    };
+  }, []);
 
   // ── Auto-suggest title from URL ─────────────────────────────────
   useEffect(() => {

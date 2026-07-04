@@ -20,6 +20,14 @@ function App() {
     loadData();
   }, [loadData]);
 
+  // Open add link modal automatically if loaded via bookmarklet (quickadd=1)
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    if (searchParams.get('quickadd') === '1') {
+      openAddModal();
+    }
+  }, [openAddModal]);
+
   useEffect(() => {
     document.documentElement.className = theme === 'light' ? 'light' : '';
   }, [theme]);

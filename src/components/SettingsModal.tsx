@@ -16,9 +16,12 @@ import {
   Eye,
   EyeOff,
   Sparkles,
+  Link,
+  Plus,
 } from 'lucide-react';
 import { useLinkMindStore } from '../store';
 import { toast } from 'react-hot-toast';
+import CleanupTab from './CleanupTab';
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -33,7 +36,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
     exportData,
   } = useLinkMindStore();
 
-  const [activeTab, setActiveTab] = useState<'stats' | 'data' | 'ai'>('stats');
+  const [activeTab, setActiveTab] = useState<'stats' | 'data' | 'ai' | 'cleanup' | 'quickadd'>('stats');
   const [confirmClear, setConfirmClear] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -187,7 +190,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
             </div>
 
             {/* Tabs Selector */}
-            <div className="flex border-b border-glass-border bg-surface-50/50 px-6 py-2 gap-2">
+            <div className="flex flex-wrap border-b border-glass-border bg-surface-50/50 px-6 py-2 gap-2">
               <button
                 onClick={() => setActiveTab('stats')}
                 className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
@@ -220,6 +223,28 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
               >
                 <Bot className="w-4 h-4" />
                 AI Assistant
+              </button>
+              <button
+                onClick={() => setActiveTab('cleanup')}
+                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                  activeTab === 'cleanup'
+                    ? 'bg-surface-300 text-surface-950 shadow-sm'
+                    : 'text-surface-600 hover:bg-surface-200 hover:text-surface-800'
+                }`}
+              >
+                <Trash2 className="w-4 h-4" />
+                Cleanup
+              </button>
+              <button
+                onClick={() => setActiveTab('quickadd')}
+                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                  activeTab === 'quickadd'
+                    ? 'bg-surface-300 text-surface-950 shadow-sm'
+                    : 'text-surface-600 hover:bg-surface-200 hover:text-surface-800'
+                }`}
+              >
+                <Link className="w-4 h-4" />
+                Quick Add
               </button>
             </div>
 
@@ -511,7 +536,9 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                     )}
                   </div>
                 </div>
-              ) : (
+              ) : activeTab === 'cleanup' ? (
+                <CleanupTab />
+              ) : activeTab === 'ai' ? (
                 /* ── TAB 3: AI CONFIGURATION ────────────────────────── */
                 <div className="space-y-5">
                   <div className="glass-subtle p-5 rounded-2xl space-y-4">
@@ -621,6 +648,51 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                     >
                       Save Assistant Configuration
                     </button>
+                  </div>
+                </div>
+              ) : (
+                /* ── TAB 5: QUICK ADD BOOKMARKLET ────────────────────── */
+                <div className="space-y-6">
+                  <div className="glass-subtle p-6 rounded-2xl space-y-4">
+                    <h4 className="text-sm font-bold text-surface-900 flex items-center gap-2">
+                      <Link className="w-4.5 h-4.5 text-accent-primary" />
+                      Quick Add Bookmarklet
+                    </h4>
+                    <p className="text-sm text-surface-700 leading-relaxed">
+                      Drag this button to your bookmarks bar. Click it on any page to save that page to LinkMind.
+                    </p>
+
+                    <div className="flex flex-col items-center justify-center p-8 bg-surface-50/50 rounded-xl border border-glass-border">
+                      <a
+                        href={`javascript:void(window.open('${window.location.origin}/?quickadd=1&url='+encodeURIComponent(window.location.href)+'&title='+encodeURIComponent(document.title),'_blank'))`}
+                        onClick={(e) => e.preventDefault()}
+                        className="select-none cursor-grab inline-flex items-center gap-2 bg-gradient-to-r from-accent-primary to-accent-secondary text-white px-6 py-3 rounded-xl font-semibold shadow-lg shadow-accent-primary/25 hover:shadow-accent-primary/45 transition-all active:cursor-grabbing transform hover:-translate-y-0.5"
+                      >
+                        <Plus className="w-4 h-4" />
+                        <span>+ Add to LinkMind</span>
+                      </a>
+                      <span className="text-[11px] text-surface-500 mt-3 flex items-center gap-1">
+                        <span>💡</span> Tip: Drag this button to your browser's Bookmarks/Favorites bar.
+                      </span>
+                    </div>
+
+                    <div className="space-y-3 pt-2 text-xs text-surface-600 leading-relaxed">
+                      <h5 className="font-semibold text-surface-800">How to use it:</h5>
+                      <ol className="list-decimal pl-4 space-y-1.5">
+                        <li>Make sure your browser's Bookmarks Bar is visible (Ctrl+Shift+B or Cmd+Shift+B).</li>
+                        <li>Drag the gradient button above directly onto your bookmarks bar.</li>
+                        <li>When browsing any webpage you want to save, click the **+ Add to LinkMind** bookmark on your bookmarks bar.</li>
+                        <li>It will open LinkMind in a new tab with the page's title and URL automatically filled in the **Add Link** modal!</li>
+                      </ol>
+
+                      <div className="mt-3.5 p-3.5 bg-surface-100/40 rounded-xl border border-glass-border text-[11px] text-surface-600 space-y-1.5">
+                        <p className="font-semibold text-surface-800">⚠️ Troubleshooting Notes:</p>
+                        <ul className="list-disc pl-4 space-y-1">
+                          <li><strong>Popup Blocker:</strong> If nothing happens when you click the bookmarklet, check the right side of your browser's address bar for a "Popup blocked" icon and choose "Always allow popups".</li>
+                          <li><strong>Content Security Policy (CSP):</strong> Some highly secure websites (like GitHub, Google, or Twitter) use strict policies that block bookmarklet executions. If the button doesn't respond on a specific site, copy the URL manually. The bookmarklet will work on almost all standard articles, documentation pages, blogs, and other sites!</li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
