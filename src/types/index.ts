@@ -59,3 +59,23 @@ export interface AISettings {
   endpoint: string;
   model: string;
 }
+
+export interface PinnedFolder {
+  id: string;
+  name: string;
+  color: string;
+  order: number;
+  createdAt: number;
+}
+
+export interface PinnedShortcut {
+  id: string;
+  folderId: string;
+  bookmarkId?: string;
+  url: string;
+  title: string;
+  faviconUrl: string;
+  order: number;
+  createdAt: number;
+}
+

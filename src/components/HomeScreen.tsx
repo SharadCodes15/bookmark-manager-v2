@@ -19,6 +19,8 @@ import { cn } from '../utils';
 import type { Bookmark } from '../types';
 import BookmarkCard from './BookmarkCard';
 import ContextMenu from './ContextMenu';
+import PinnedShortcutsSection from './PinnedShortcutsSection';
+
 
 /* ------------------------------------------------------------------ */
 /*  Seeded PRNG – Linear Congruential Generator                       */
@@ -550,7 +552,11 @@ export default function HomeScreen() {
                 </div>
               </section>
             )}
+
+            {/* ── Pinned Shortcuts Folders Row ─────────────────── */}
+            <PinnedShortcutsSection />
           </div>
+
 
           {/* Sidebar Column (1/3 width on large screens) */}
           <div className="space-y-8">
