@@ -106,7 +106,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           {activeFilterCount > 0 && (
             <button
               onClick={resetFilters}
-              className="text-xs text-accent-primary hover:text-accent-primary-light transition-colors px-2 py-1 rounded-lg hover:bg-surface-300"
+              className="text-xs text-accent-primary hover:text-accent-primary-light transition-all px-2.5 py-1 rounded-lg glass-neumorphic-raised hover:scale-[1.03] active:scale-[0.97]"
             >
               Clear all
             </button>
@@ -137,10 +137,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                   <button
                     key={col.id}
                     onClick={() => toggleCollection(col.id)}
-                    className={`w-full flex items-center gap-2.5 px-2.5 py-2 rounded-xl text-sm transition-all ${
+                    className={`w-full flex items-center gap-2.5 px-2.5 py-2 rounded-xl text-sm transition-all hover:scale-[1.02] active:scale-[0.98] ${
                       isActive
-                        ? 'bg-surface-300 text-surface-900 font-medium'
-                        : 'text-surface-700 hover:bg-surface-200'
+                        ? 'glass-neumorphic-pressed text-surface-950 font-bold'
+                        : 'text-surface-700 glass-neumorphic-raised'
                     }`}
                   >
                     <span
@@ -169,10 +169,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 <button
                   key={value}
                   onClick={() => toggleCategory(value)}
-                  className={`w-full flex items-center gap-2.5 px-2.5 py-2 rounded-xl text-sm transition-all ${
+                  className={`w-full flex items-center gap-2.5 px-2.5 py-2 rounded-xl text-sm transition-all hover:scale-[1.02] active:scale-[0.98] ${
                     isActive
-                      ? 'bg-surface-300 text-surface-900 font-medium'
-                      : 'text-surface-700 hover:bg-surface-200'
+                      ? 'glass-neumorphic-pressed text-surface-950 font-bold'
+                      : 'text-surface-700 glass-neumorphic-raised'
                   }`}
                 >
                   <Icon className={`w-4 h-4 ${colorClass}`} />
@@ -190,17 +190,17 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             Status
           </h3>
           <div className="flex flex-wrap gap-1.5 px-1">
-            {statuses.map(({ value, label, colorClass, bgClass }) => {
+            {statuses.map(({ value, label, colorClass }) => {
               const isActive = filters.statuses.includes(value);
               const count = getStatusCount(value);
               return (
                 <button
                   key={value}
                   onClick={() => toggleStatus(value)}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all hover:scale-[1.03] active:scale-[0.97] ${
                     isActive
-                      ? `${bgClass} ${colorClass} ring-1 ring-current/20`
-                      : 'bg-surface-300 text-surface-600 hover:bg-surface-400'
+                      ? `glass-neumorphic-pressed ${colorClass} font-bold`
+                      : 'glass-neumorphic-raised text-surface-600'
                   }`}
                 >
                   {label}
@@ -231,10 +231,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                           : [...current, tag],
                       });
                     }}
-                    className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs transition-all ${
+                    className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs transition-all hover:scale-[1.03] active:scale-[0.97] ${
                       isActive
-                        ? 'bg-accent-primary/20 text-accent-primary-light ring-1 ring-accent-primary/20'
-                        : 'bg-surface-300 text-surface-600 hover:bg-surface-400'
+                        ? 'glass-neumorphic-pressed text-accent-primary font-bold'
+                        : 'glass-neumorphic-raised text-surface-600'
                     }`}
                   >
                     <Hash className="w-3 h-3" />

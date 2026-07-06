@@ -410,8 +410,8 @@ export default function AddEditModal() {
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
                     className={cn(
-                      'w-full rounded-xl border border-glass-border bg-surface-200 py-3 pr-4 text-sm text-surface-900 placeholder-surface-500 transition-all',
-                      'focus:border-accent-primary focus:outline-none focus:ring-2 focus:ring-accent-primary/30',
+                      'w-full rounded-xl glass-neumorphic-pressed py-3 pr-4 text-sm text-surface-900 placeholder-surface-500 transition-all border-none',
+                      'focus:outline-none focus:ring-2 focus:ring-accent-primary/30',
                       faviconSrc ? 'pl-10' : 'pl-4',
                     )}
                   />
@@ -432,7 +432,7 @@ export default function AddEditModal() {
                     setTitle(e.target.value);
                     urlTitleSynced.current = false;
                   }}
-                  className="w-full rounded-xl border border-glass-border bg-surface-200 px-4 py-3 text-sm text-surface-900 placeholder-surface-500 transition-all focus:border-accent-primary focus:outline-none focus:ring-2 focus:ring-accent-primary/30"
+                  className="w-full rounded-xl glass-neumorphic-pressed px-4 py-3 text-sm text-surface-900 placeholder-surface-500 transition-all focus:outline-none focus:ring-2 focus:ring-accent-primary/30 border-none"
                 />
               </label>
 
@@ -451,10 +451,10 @@ export default function AddEditModal() {
                         type="button"
                         onClick={() => setCategory(cat)}
                         className={cn(
-                          'flex-1 rounded-xl border px-4 py-2 text-sm font-medium transition-all',
+                          'flex-1 rounded-xl px-4 py-2 text-sm font-medium transition-all border-none hover:scale-[1.02] active:scale-[0.98]',
                           active
-                            ? styles.selected
-                            : 'border-transparent bg-surface-300 text-surface-700 hover:bg-surface-400',
+                            ? `${styles.selected} glass-neumorphic-pressed font-bold`
+                            : 'glass-neumorphic-raised text-surface-700',
                         )}
                       >
                         {cat}
@@ -479,10 +479,10 @@ export default function AddEditModal() {
                         type="button"
                         onClick={() => setStatus(st)}
                         className={cn(
-                          'flex-1 rounded-xl border px-4 py-2 text-sm font-medium transition-all',
+                          'flex-1 rounded-xl px-4 py-2 text-sm font-medium transition-all border-none hover:scale-[1.02] active:scale-[0.98]',
                           active
-                            ? styles.selected
-                            : 'border-transparent bg-surface-300 text-surface-700 hover:bg-surface-400',
+                            ? `${styles.selected} glass-neumorphic-pressed font-bold`
+                            : 'glass-neumorphic-raised text-surface-700',
                         )}
                       >
                         {st}
@@ -498,7 +498,7 @@ export default function AddEditModal() {
                   <Tag className="h-3.5 w-3.5" /> Tags
                 </span>
                 <div className="relative">
-                  <div className="flex flex-wrap items-center gap-2 rounded-xl border border-glass-border bg-surface-200 px-3 py-2.5 transition-all focus-within:border-accent-primary focus-within:ring-2 focus-within:ring-accent-primary/30">
+                  <div className="flex flex-wrap items-center gap-2 rounded-xl glass-neumorphic-pressed px-3 py-2.5 transition-all focus-within:ring-2 focus-within:ring-accent-primary/30 border-none">
                     {tags.map((t) => (
                       <span
                         key={t}
@@ -571,7 +571,7 @@ export default function AddEditModal() {
                 <button
                   type="button"
                   onClick={() => setShowCollectionDropdown((v) => !v)}
-                  className="flex w-full items-center justify-between rounded-xl border border-glass-border bg-surface-200 px-4 py-3 text-sm transition-all hover:bg-surface-300 focus:border-accent-primary focus:outline-none focus:ring-2 focus:ring-accent-primary/30"
+                  className="flex w-full items-center justify-between rounded-xl glass-neumorphic-pressed px-4 py-3 text-sm transition-all focus:outline-none focus:ring-2 focus:ring-accent-primary/30 border-none"
                 >
                   <span className="flex items-center gap-2">
                     {selectedCollection ? (
@@ -671,7 +671,7 @@ export default function AddEditModal() {
                                 void handleCreateCollection();
                               }
                             }}
-                            className="w-full rounded-lg border border-glass-border bg-surface-200 px-3 py-1.5 text-sm text-surface-900 placeholder-surface-500 outline-none focus:border-accent-primary"
+                            className="w-full rounded-lg glass-neumorphic-pressed px-3 py-1.5 text-sm text-surface-900 placeholder-surface-500 outline-none border-none focus:ring-1 focus:ring-accent-primary/20"
                           />
                           <div className="flex items-center gap-1.5">
                             {PRESET_COLORS.map((color) => (
@@ -725,7 +725,7 @@ export default function AddEditModal() {
                   <button
                     type="button"
                     onClick={() => void handleDelete()}
-                    className="flex items-center gap-1.5 rounded-xl px-4 py-2 text-sm font-medium text-accent-danger transition-colors hover:bg-accent-danger/15"
+                    className="flex items-center gap-1.5 rounded-xl px-4 py-2 text-sm font-medium text-accent-danger transition-all glass-neumorphic-raised hover:scale-[1.04] active:scale-[0.96]"
                   >
                     <Trash2 className="h-4 w-4" />
                     Delete
@@ -738,7 +738,7 @@ export default function AddEditModal() {
                 <button
                   type="button"
                   onClick={closeModal}
-                  className="rounded-xl px-4 py-2 text-sm font-medium text-surface-600 transition-colors hover:bg-surface-300 hover:text-surface-800"
+                  className="rounded-xl px-4 py-2 text-sm font-medium text-surface-600 transition-all glass-neumorphic-raised hover:scale-[1.04] active:scale-[0.96]"
                 >
                   Cancel
                 </button>
@@ -746,7 +746,7 @@ export default function AddEditModal() {
                   type="button"
                   disabled={!url.trim() || !title.trim() || isSaving}
                   onClick={() => void handleSave()}
-                  className="relative overflow-hidden rounded-xl bg-gradient-to-r from-accent-primary to-accent-secondary px-6 py-2 text-sm font-semibold text-white shadow-lg shadow-accent-primary/25 transition-all hover:shadow-accent-primary/40 disabled:opacity-40 disabled:shadow-none"
+                  className="relative overflow-hidden rounded-xl bg-gradient-to-r from-accent-primary to-accent-secondary px-6 py-2 text-sm font-semibold text-white transition-all glass-neumorphic-raised hover:scale-[1.04] active:scale-[0.96] disabled:opacity-40"
                 >
                   <span className="relative z-10">
                     {isSaving ? 'Saving…' : isEditing ? 'Save Changes' : 'Add Link'}

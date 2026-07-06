@@ -164,17 +164,17 @@ export default function AIChatbot() {
         </div>
 
         {/* History List */}
-        <div className="flex-1 overflow-y-auto p-2 space-y-1">
+        <div className="flex-1 overflow-y-auto p-2 space-y-2">
           {chatSessions.map((session) => {
             const isActive = session.id === currentSessionId;
             return (
               <div
                 key={session.id}
                 onClick={() => !isActive && !isStreaming && loadChatMessages(session.id)}
-                className={`group flex items-center justify-between px-3 py-2.5 rounded-xl text-sm cursor-pointer transition-all ${
+                className={`group flex items-center justify-between px-3 py-2.5 rounded-xl text-sm cursor-pointer transition-all hover:scale-[1.02] active:scale-[0.98] ${
                   isActive
-                    ? 'bg-surface-300 text-surface-950 font-medium'
-                    : 'text-surface-650 hover:bg-surface-200 hover:text-surface-900'
+                    ? 'glass-neumorphic-pressed text-surface-950 font-bold'
+                    : 'glass-neumorphic-raised text-surface-650 hover:text-surface-900'
                 } ${isStreaming && !isActive ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 <div className="flex items-center gap-2.5 min-w-0">
@@ -236,7 +236,7 @@ export default function AIChatbot() {
                   <button
                     key={preset}
                     onClick={() => handleSend(preset)}
-                    className="glass-subtle p-3 rounded-xl text-left text-xs text-surface-750 hover:bg-surface-200 hover:text-surface-950 transition-colors border border-glass-border flex gap-2 cursor-pointer shadow-sm"
+                    className="glass-neumorphic-raised p-3 rounded-xl text-left text-xs text-surface-750 hover:text-surface-950 transition-all hover:scale-[1.02] active:scale-[0.98] flex gap-2 cursor-pointer"
                     disabled={isStreaming}
                   >
                     <HelpCircle className="w-4 h-4 text-accent-secondary shrink-0" />
@@ -274,10 +274,10 @@ export default function AIChatbot() {
 
                       {/* Bubble */}
                       <div
-                        className={`rounded-2xl px-4 py-3 max-w-[85%] sm:max-w-[75%] shadow-sm ${
+                        className={`rounded-2xl px-4 py-3 max-w-[85%] sm:max-w-[75%] shadow-sm transition-all ${
                           isUser
-                            ? 'bg-accent-primary/20 text-surface-900 border border-accent-primary/10 rounded-tr-sm'
-                            : 'glass border border-glass-border rounded-tl-sm'
+                            ? 'glass-neumorphic-pressed bg-accent-primary/15 text-surface-950 rounded-tr-sm'
+                            : 'glass-neumorphic-raised rounded-tl-sm'
                         }`}
                       >
                         {isUser ? (
@@ -335,14 +335,14 @@ export default function AIChatbot() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                className="w-full bg-surface-200 border border-glass-border rounded-2xl pl-4 pr-12 py-3 text-xs sm:text-sm text-surface-900 placeholder:text-surface-500 focus:outline-none focus:ring-2 focus:ring-accent-primary/30 resize-none max-h-[160px] overflow-y-auto leading-normal"
+                className="w-full glass-neumorphic-pressed rounded-2xl pl-4 pr-12 py-3 text-xs sm:text-sm text-surface-900 placeholder:text-surface-500 focus:outline-none focus:ring-2 focus:ring-accent-primary/30 resize-none max-h-[160px] overflow-y-auto leading-normal border-none"
                 disabled={!currentSessionId}
               />
               <div className="absolute right-2 bottom-2 flex items-center gap-1.5">
                 {isStreaming ? (
                   <button
                     onClick={handleStop}
-                    className="p-2 rounded-xl bg-accent-danger text-white shadow-md hover:bg-accent-danger-dark transition-colors cursor-pointer flex items-center justify-center shrink-0"
+                    className="p-2 rounded-xl bg-accent-danger text-white glass-neumorphic-raised hover:scale-[1.05] active:scale-[0.95] transition-all cursor-pointer flex items-center justify-center shrink-0"
                     title="Stop Generating"
                   >
                     <Square className="w-3.5 h-3.5 fill-current" />
@@ -351,7 +351,7 @@ export default function AIChatbot() {
                   <button
                     onClick={() => handleSend()}
                     disabled={!input.trim() || !currentSessionId}
-                    className="p-2 rounded-xl bg-accent-primary text-white shadow-md hover:bg-accent-primary-dark transition-colors cursor-pointer flex items-center justify-center shrink-0 disabled:opacity-40 disabled:shadow-none"
+                    className="p-2 rounded-xl bg-accent-primary text-white glass-neumorphic-raised hover:scale-[1.05] active:scale-[0.95] transition-all cursor-pointer flex items-center justify-center shrink-0 disabled:opacity-40"
                     title="Send Message"
                   >
                     <Send className="w-3.5 h-3.5 fill-current" />

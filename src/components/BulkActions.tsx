@@ -38,7 +38,7 @@ export default function BulkActions() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="glass rounded-2xl px-4 py-3 mb-4 flex items-center gap-3 flex-wrap"
+      className="glass-neumorphic-raised rounded-2xl px-4 py-3 mb-4 flex items-center gap-3 flex-wrap"
     >
       <div className="flex items-center gap-2 text-sm">
         <CheckSquare className="w-4 h-4 text-accent-primary" />
@@ -66,7 +66,7 @@ export default function BulkActions() {
             setShowStatusMenu(false);
             setShowCollectionMenu(false);
           }}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surface-300 hover:bg-surface-400 text-xs text-surface-700 transition-colors"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl glass-neumorphic-raised text-xs text-surface-700 transition-all hover:scale-[1.03] active:scale-[0.97]"
         >
           <Layers className="w-3.5 h-3.5" />
           Category
@@ -97,7 +97,7 @@ export default function BulkActions() {
             setShowCategoryMenu(false);
             setShowCollectionMenu(false);
           }}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surface-300 hover:bg-surface-400 text-xs text-surface-700 transition-colors"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl glass-neumorphic-raised text-xs text-surface-700 transition-all hover:scale-[1.03] active:scale-[0.97]"
         >
           <Activity className="w-3.5 h-3.5" />
           Status
@@ -128,7 +128,7 @@ export default function BulkActions() {
             setShowCategoryMenu(false);
             setShowStatusMenu(false);
           }}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surface-300 hover:bg-surface-400 text-xs text-surface-700 transition-colors"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl glass-neumorphic-raised text-xs text-surface-700 transition-all hover:scale-[1.03] active:scale-[0.97]"
         >
           <Folder className="w-3.5 h-3.5" />
           Collection
@@ -164,7 +164,7 @@ export default function BulkActions() {
       {/* Delete */}
       <button
         onClick={() => bulkDeleteBookmarks(ids)}
-        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-accent-danger/15 hover:bg-accent-danger/25 text-accent-danger text-xs font-medium transition-colors"
+        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-accent-danger text-xs font-medium transition-all glass-neumorphic-raised hover:scale-[1.03] active:scale-[0.97]"
       >
         <Trash2 className="w-3.5 h-3.5" />
         Delete
@@ -173,7 +173,7 @@ export default function BulkActions() {
       {/* Clear selection */}
       <button
         onClick={clearSelection}
-        className="p-1.5 rounded-lg hover:bg-surface-300 text-surface-500 transition-colors"
+        className="p-1.5 rounded-lg glass-neumorphic-raised text-surface-500 transition-all hover:scale-[1.05] active:scale-[0.95]"
         title="Clear selection"
       >
         <X className="w-4 h-4" />

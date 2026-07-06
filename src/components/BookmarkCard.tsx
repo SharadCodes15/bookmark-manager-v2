@@ -77,7 +77,7 @@ export default function BookmarkCard({
       onContextMenu={handleContextMenu}
       tabIndex={0}
       className={cn(
-        'glass-subtle rounded-2xl p-4 cursor-pointer group relative bookmark-card-focusable',
+        'glass-neumorphic-raised rounded-2xl p-4 cursor-pointer group relative bookmark-card-focusable',
         'border-l-[3px] transition-shadow duration-300',
         'focus:ring-2 focus:ring-accent-primary focus:outline-none',
         categoryBorderColor[bookmark.category],

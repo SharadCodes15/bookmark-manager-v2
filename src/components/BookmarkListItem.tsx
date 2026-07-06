@@ -52,7 +52,7 @@ export default function BookmarkListItem({
       onContextMenu={handleContextMenu}
       tabIndex={0}
       className={cn(
-        'glass-subtle rounded-xl px-4 py-3 flex items-center gap-3 group bookmark-card-focusable',
+        'glass-neumorphic-raised rounded-xl px-4 py-3 flex items-center gap-3 group bookmark-card-focusable',
         'focus:ring-2 focus:ring-accent-primary focus:outline-none',
         isSelected && 'ring-2 ring-accent-primary/60'
       )}

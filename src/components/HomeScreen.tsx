@@ -181,7 +181,7 @@ function SkeletonCard({ index }: { index: number }) {
       initial={{ opacity: 0, scale: 0.92 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: index * 0.06 }}
-      className="glass-subtle rounded-2xl p-4 space-y-3 animate-pulse"
+      className="glass-neumorphic-raised rounded-2xl p-4 space-y-3 animate-pulse"
     >
       <div className="flex items-center gap-3">
         <div className="w-8 h-8 rounded-lg bg-surface-200/30" />
@@ -220,7 +220,7 @@ function StatCard({
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.15 + index * 0.06 }}
-      className="glass-subtle rounded-2xl p-4 flex items-center gap-3.5 min-w-0 border border-glass-border shadow-sm"
+      className="glass-neumorphic-raised rounded-2xl p-4 flex items-center gap-3.5 min-w-0"
     >
       <div
         className={cn(
@@ -452,7 +452,7 @@ export default function HomeScreen() {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="glass-subtle rounded-2xl p-6 text-center border border-dashed border-glass-border shadow-sm"
+                  className="glass-neumorphic-raised rounded-2xl p-6 text-center border border-dashed border-glass-border"
                 >
                   <p className="text-xs text-surface-500 font-semibold">
                     Right-click any bookmark in the Library and select "Pin" to add it here for quick access.
@@ -505,7 +505,7 @@ export default function HomeScreen() {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="glass-subtle rounded-2xl p-8 text-center border border-glass-border"
+                  className="glass-neumorphic-raised rounded-2xl p-8 text-center"
                 >
                   <Sparkles
                     size={28}
@@ -586,12 +586,10 @@ export default function HomeScreen() {
                     whileTap={{ scale: 0.96 }}
                     onClick={action.onClick}
                     className={cn(
-                      'glass-subtle rounded-2xl p-4 flex flex-col items-center justify-center text-center gap-2.5',
+                      'glass-neumorphic-raised rounded-2xl p-4 flex flex-col items-center justify-center text-center gap-2.5',
                       'cursor-pointer transition-all duration-200',
-                      'bg-gradient-to-br',
-                      action.gradient,
                       'hover:border-accent-primary/40',
-                      'group shadow-sm hover:shadow-md',
+                      'group',
                     )}
                   >
                     <action.icon
@@ -659,7 +657,7 @@ export default function HomeScreen() {
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.35 }}
-                    className="glass-subtle rounded-2xl p-4 border border-glass-border shadow-sm"
+                    className="glass-neumorphic-raised rounded-2xl p-4"
                   >
                     <p className="text-[10px] font-bold text-surface-500 uppercase tracking-widest mb-3">
                       Status Breakdown
@@ -720,7 +718,7 @@ export default function HomeScreen() {
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 }}
-                    className="glass-subtle rounded-2xl p-4 border border-glass-border shadow-sm"
+                    className="glass-neumorphic-raised rounded-2xl p-4"
                   >
                     <p className="text-[10px] font-bold text-surface-500 uppercase tracking-widest mb-3">
                       Categories
@@ -752,7 +750,7 @@ export default function HomeScreen() {
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.45 }}
-                    className="glass-subtle rounded-2xl p-4 border border-glass-border space-y-5 shadow-sm"
+                    className="glass-neumorphic-raised rounded-2xl p-4 space-y-5"
                   >
                     {/* Top Tags */}
                     {stats.topTags.length > 0 && (

@@ -42,6 +42,10 @@
   --color-glass-bg: rgba(17, 17, 25, 0.65);
   --color-glass-border: rgba(255, 255, 255, 0.06);
   --color-glass-highlight: rgba(255, 255, 255, 0.03);
+
+  /* Neumorphic Shadows */
+  --neumorphic-shadow-light: rgba(255, 255, 255, 0.03);
+  --neumorphic-shadow-dark: rgba(0, 0, 0, 0.55);
 }
 
 /* ── Global Styles ──────────────────────────────────────────────── */
@@ -103,6 +107,9 @@ body::before {
   --color-glass-bg: rgba(255, 255, 255, 0.65);
   --color-glass-border: rgba(0, 0, 0, 0.06);
   --color-glass-highlight: rgba(0, 0, 0, 0.02);
+
+  --neumorphic-shadow-light: rgba(255, 255, 255, 0.9);
+  --neumorphic-shadow-dark: rgba(176, 176, 192, 0.4);
 }
 
 .light body::before,
@@ -128,6 +135,29 @@ body::before {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--color-glass-border);
+}
+
+.glass-neumorphic-raised {
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-glass-border);
+  box-shadow:
+    0 0 0 1px var(--color-glass-highlight) inset,
+    4px 4px 10px var(--neumorphic-shadow-dark),
+    -4px -4px 10px var(--neumorphic-shadow-light);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-neumorphic-pressed {
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-glass-border);
+  box-shadow:
+    inset 3px 3px 6px var(--neumorphic-shadow-dark),
+    inset -3px -3px 6px var(--neumorphic-shadow-light);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ── Scrollbar Styling ──────────────────────────────────────────── */

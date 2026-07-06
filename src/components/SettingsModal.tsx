@@ -193,10 +193,10 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
             <div className="flex flex-wrap border-b border-glass-border bg-surface-50/50 px-6 py-2 gap-2">
               <button
                 onClick={() => setActiveTab('stats')}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all hover:scale-[1.02] active:scale-[0.98] ${
                   activeTab === 'stats'
-                    ? 'bg-surface-300 text-surface-950 shadow-sm'
-                    : 'text-surface-600 hover:bg-surface-200 hover:text-surface-800'
+                    ? 'glass-neumorphic-pressed text-accent-primary font-bold'
+                    : 'glass-neumorphic-raised text-surface-650 hover:text-surface-900'
                 }`}
               >
                 <BarChart3 className="w-4 h-4" />
@@ -204,10 +204,10 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
               </button>
               <button
                 onClick={() => setActiveTab('data')}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all hover:scale-[1.02] active:scale-[0.98] ${
                   activeTab === 'data'
-                    ? 'bg-surface-300 text-surface-950 shadow-sm'
-                    : 'text-surface-600 hover:bg-surface-200 hover:text-surface-800'
+                    ? 'glass-neumorphic-pressed text-accent-primary font-bold'
+                    : 'glass-neumorphic-raised text-surface-650 hover:text-surface-900'
                 }`}
               >
                 <Database className="w-4 h-4" />
@@ -215,10 +215,10 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
               </button>
               <button
                 onClick={() => setActiveTab('ai')}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all hover:scale-[1.02] active:scale-[0.98] ${
                   activeTab === 'ai'
-                    ? 'bg-surface-300 text-surface-950 shadow-sm'
-                    : 'text-surface-600 hover:bg-surface-200 hover:text-surface-800'
+                    ? 'glass-neumorphic-pressed text-accent-primary font-bold'
+                    : 'glass-neumorphic-raised text-surface-650 hover:text-surface-900'
                 }`}
               >
                 <Bot className="w-4 h-4" />
@@ -226,10 +226,10 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
               </button>
               <button
                 onClick={() => setActiveTab('cleanup')}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all hover:scale-[1.02] active:scale-[0.98] ${
                   activeTab === 'cleanup'
-                    ? 'bg-surface-300 text-surface-950 shadow-sm'
-                    : 'text-surface-600 hover:bg-surface-200 hover:text-surface-800'
+                    ? 'glass-neumorphic-pressed text-accent-primary font-bold'
+                    : 'glass-neumorphic-raised text-surface-650 hover:text-surface-900'
                 }`}
               >
                 <Trash2 className="w-4 h-4" />
@@ -237,10 +237,10 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
               </button>
               <button
                 onClick={() => setActiveTab('quickadd')}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all hover:scale-[1.02] active:scale-[0.98] ${
                   activeTab === 'quickadd'
-                    ? 'bg-surface-300 text-surface-950 shadow-sm'
-                    : 'text-surface-600 hover:bg-surface-200 hover:text-surface-800'
+                    ? 'glass-neumorphic-pressed text-accent-primary font-bold'
+                    : 'glass-neumorphic-raised text-surface-650 hover:text-surface-900'
                 }`}
               >
                 <Link className="w-4 h-4" />
@@ -255,7 +255,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                 <div className="space-y-6">
                   {/* Grid cards */}
                   <div className="grid grid-cols-3 gap-4">
-                    <div className="glass-subtle p-4 rounded-xl text-center">
+                    <div className="glass-neumorphic-raised p-4 rounded-xl text-center">
                       <span className="text-xs font-semibold text-surface-600 uppercase tracking-wider block mb-1">
                         Total Bookmarks
                       </span>
@@ -263,7 +263,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                         {totalCount}
                       </span>
                     </div>
-                    <div className="glass-subtle p-4 rounded-xl text-center">
+                    <div className="glass-neumorphic-raised p-4 rounded-xl text-center">
                       <span className="text-xs font-semibold text-surface-600 uppercase tracking-wider block mb-1">
                         Collections
                       </span>
@@ -271,7 +271,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                         {collections.length}
                       </span>
                     </div>
-                    <div className="glass-subtle p-4 rounded-xl text-center">
+                    <div className="glass-neumorphic-raised p-4 rounded-xl text-center">
                       <span className="text-xs font-semibold text-surface-600 uppercase tracking-wider block mb-1">
                         Unique Tags
                       </span>
@@ -282,7 +282,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                   </div>
 
                   {/* Status stacked progress bar */}
-                  <section className="glass-subtle p-5 rounded-2xl">
+                  <section className="glass-neumorphic-raised p-5 rounded-2xl">
                     <h3 className="text-sm font-semibold text-surface-800 mb-4 flex items-center gap-2">
                       Status Breakdown
                     </h3>
@@ -352,7 +352,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                   {/* Two columns: Categories & Collections / Tags */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Categories */}
-                    <div className="glass-subtle p-5 rounded-2xl">
+                    <div className="glass-neumorphic-raised p-5 rounded-2xl">
                       <h3 className="text-sm font-semibold text-surface-800 mb-4 flex items-center gap-2">
                         <Layers className="w-4 h-4 text-accent-primary" />
                         Categories
@@ -398,7 +398,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                     </div>
 
                     {/* Top Tags */}
-                    <div className="glass-subtle p-5 rounded-2xl">
+                    <div className="glass-neumorphic-raised p-5 rounded-2xl">
                       <h3 className="text-sm font-semibold text-surface-800 mb-4 flex items-center gap-2">
                         <Tag className="w-4 h-4 text-accent-success" />
                         Top Tags
@@ -423,7 +423,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                   </div>
 
                   {/* Collections List */}
-                  <section className="glass-subtle p-5 rounded-2xl">
+                  <section className="glass-neumorphic-raised p-5 rounded-2xl">
                     <h3 className="text-sm font-semibold text-surface-800 mb-4 flex items-center gap-2">
                       <Folder className="w-4 h-4 text-accent-secondary" />
                       Collection Stats
@@ -453,7 +453,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                   {/* Backup & Restore Panel */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Export */}
-                    <div className="glass-subtle p-5 rounded-2xl flex flex-col justify-between">
+                    <div className="glass-neumorphic-raised p-5 rounded-2xl flex flex-col justify-between">
                       <div>
                         <h4 className="text-sm font-bold text-surface-900 mb-2 flex items-center gap-2">
                           <Download className="w-4 h-4 text-accent-primary" />
@@ -473,10 +473,10 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                     </div>
 
                     {/* Import */}
-                    <div className="glass-subtle p-5 rounded-2xl flex flex-col justify-between">
+                    <div className="glass-neumorphic-raised p-5 rounded-2xl flex flex-col justify-between">
                       <div>
                         <h4 className="text-sm font-bold text-surface-900 mb-2 flex items-center gap-2">
-                          <Upload className="w-4 h-4 text-accent-success" />
+                          <Upload className="w-4.5 h-4.5 text-accent-success" />
                           Import Backup
                         </h4>
                         <p className="text-xs text-surface-600 mb-4 leading-relaxed">
@@ -485,7 +485,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                       </div>
                       <button
                         onClick={() => fileInputRef.current?.click()}
-                        className="w-full flex items-center justify-center gap-2 bg-surface-300 hover:bg-surface-400 text-surface-850 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer border border-glass-border"
+                        className="w-full flex items-center justify-center gap-2 glass-neumorphic-raised hover:scale-[1.03] active:scale-[0.97] text-surface-850 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer"
                       >
                         <Upload className="w-4 h-4" />
                         Select JSON File
@@ -541,7 +541,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
               ) : activeTab === 'ai' ? (
                 /* ── TAB 3: AI CONFIGURATION ────────────────────────── */
                 <div className="space-y-5">
-                  <div className="glass-subtle p-5 rounded-2xl space-y-4">
+                  <div className="glass-neumorphic-raised p-5 rounded-2xl space-y-4">
                     <h4 className="text-sm font-bold text-surface-900 flex items-center gap-2">
                       <Sparkles className="w-4.5 h-4.5 text-accent-primary" />
                       Configure AI Chatbot Settings
@@ -575,7 +575,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                             setModel('claude-3-5-sonnet-20240620');
                           }
                         }}
-                        className="w-full rounded-xl border border-glass-border bg-surface-200 px-4 py-2.5 text-sm text-surface-900 focus:border-accent-primary focus:outline-none"
+                        className="w-full rounded-xl glass-neumorphic-pressed px-4 py-2.5 text-sm text-surface-900 focus:outline-none border-none"
                       >
                         <option value="ollama">Ollama (Local / Offline-first)</option>
                         <option value="openai">OpenAI (ChatGPT)</option>
@@ -595,7 +595,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                           placeholder={provider === 'ollama' ? 'http://localhost:11434' : 'https://api.openai.com/v1'}
                           value={endpoint}
                           onChange={(e) => setEndpoint(e.target.value)}
-                          className="w-full rounded-xl border border-glass-border bg-surface-200 px-4 py-2.5 text-sm text-surface-900 focus:border-accent-primary focus:outline-none placeholder-surface-500"
+                          className="w-full rounded-xl glass-neumorphic-pressed px-4 py-2.5 text-sm text-surface-900 focus:outline-none placeholder-surface-500 border-none"
                         />
                       </div>
                     )}
@@ -607,12 +607,12 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                           API Secret Key
                         </label>
                         <div className="relative">
-                          <input
+                           <input
                             type={showApiKey ? 'text' : 'password'}
                             placeholder={`Enter your ${provider.toUpperCase()} API Key`}
                             value={apiKey}
                             onChange={(e) => setApiKey(e.target.value)}
-                            className="w-full rounded-xl border border-glass-border bg-surface-200 pl-4 pr-10 py-2.5 text-sm text-surface-900 focus:border-accent-primary focus:outline-none placeholder-surface-500"
+                            className="w-full rounded-xl glass-neumorphic-pressed pl-4 pr-10 py-2.5 text-sm text-surface-900 focus:outline-none placeholder-surface-500 border-none"
                           />
                           <button
                             type="button"
@@ -635,7 +635,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                         placeholder="e.g. gpt-4o, llama3, gemini-1.5-flash"
                         value={model}
                         onChange={(e) => setModel(e.target.value)}
-                        className="w-full rounded-xl border border-glass-border bg-surface-200 px-4 py-2.5 text-sm text-surface-900 focus:border-accent-primary focus:outline-none placeholder-surface-500"
+                        className="w-full rounded-xl glass-neumorphic-pressed px-4 py-2.5 text-sm text-surface-900 focus:outline-none placeholder-surface-500 border-none"
                       />
                     </div>
 
@@ -644,7 +644,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                       onClick={() => {
                         saveAISettings({ provider, apiKey, endpoint, model });
                       }}
-                      className="w-full bg-gradient-to-r from-accent-primary to-accent-secondary text-white py-2.5 rounded-xl text-sm font-semibold hover:shadow-lg hover:shadow-accent-primary/20 transition-all cursor-pointer mt-2"
+                      className="w-full bg-gradient-to-r from-accent-primary to-accent-secondary text-white py-2.5 rounded-xl text-sm font-semibold glass-neumorphic-raised hover:scale-[1.03] active:scale-[0.97] transition-all cursor-pointer mt-2"
                     >
                       Save Assistant Configuration
                     </button>
@@ -653,7 +653,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
               ) : (
                 /* ── TAB 5: QUICK ADD BOOKMARKLET ────────────────────── */
                 <div className="space-y-6">
-                  <div className="glass-subtle p-6 rounded-2xl space-y-4">
+                  <div className="glass-neumorphic-raised p-6 rounded-2xl space-y-4">
                     <h4 className="text-sm font-bold text-surface-900 flex items-center gap-2">
                       <Link className="w-4.5 h-4.5 text-accent-primary" />
                       Quick Add Bookmarklet
@@ -702,7 +702,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
             <div className="px-6 py-4 border-t border-glass-border flex justify-end">
               <button
                 onClick={onClose}
-                className="bg-surface-350 hover:bg-surface-400 text-surface-900 px-5 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer"
+                className="glass-neumorphic-raised text-surface-900 px-5 py-2 rounded-xl text-sm font-bold transition-all hover:scale-[1.04] active:scale-[0.96] cursor-pointer"
               >
                 Close Settings
               </button>

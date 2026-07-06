@@ -113,7 +113,7 @@ export default function Header({ onToggleSidebar, onOpenSettings }: HeaderProps)
             placeholder="Search bookmarks… (⌘K)"
             value={filters.search}
             onChange={(e) => setFilters({ search: e.target.value })}
-            className="w-full bg-surface-200/80 border border-glass-border rounded-xl pl-10 pr-4 py-2.5 text-sm text-surface-900 placeholder:text-surface-500 focus:outline-none focus:ring-2 focus:ring-accent-primary/40 focus:border-accent-primary/30 transition-all"
+            className="w-full glass-neumorphic-pressed rounded-xl pl-10 pr-4 py-2.5 text-sm text-surface-900 placeholder:text-surface-500 focus:outline-none focus:ring-2 focus:ring-accent-primary/40 transition-all"
           />
           {filters.search && (
             <button
@@ -143,7 +143,7 @@ export default function Header({ onToggleSidebar, onOpenSettings }: HeaderProps)
         {/* Sort */}
         <div className="hidden md:flex items-center gap-1">
           <div className="relative group">
-            <button className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-surface-200/80 hover:bg-surface-300 border border-glass-border text-sm text-surface-700 transition-colors">
+            <button className="flex items-center gap-1.5 px-3 py-2 rounded-xl glass-neumorphic-raised text-sm text-surface-700 transition-all hover:scale-[1.03] active:scale-[0.97]">
               <ArrowUpDown className="w-3.5 h-3.5" />
               <span className="hidden lg:inline">{sortOptions.find(s => s.value === sortOption)?.label}</span>
             </button>
@@ -166,7 +166,7 @@ export default function Header({ onToggleSidebar, onOpenSettings }: HeaderProps)
         </div>
 
         {/* View Toggle */}
-        <div className="flex items-center bg-surface-200/80 rounded-xl border border-glass-border p-0.5">
+        <div className="flex items-center glass-neumorphic-pressed rounded-xl p-0.5">
           {viewOptions.map(({ mode, icon: Icon, label }) => {
             const isActive = viewMode === mode || (mode === 'grid' && viewMode === 'list');
             return (
@@ -191,9 +191,8 @@ export default function Header({ onToggleSidebar, onOpenSettings }: HeaderProps)
           })}
         </div>
 
-        {/* Grid / List sub-toggle (visible only in Library mode) */}
         {isLibraryMode(viewMode) && (
-          <div className="flex items-center bg-surface-200/80 rounded-lg border border-glass-border p-0.5 gap-0.5">
+          <div className="flex items-center glass-neumorphic-pressed rounded-lg p-0.5 gap-0.5">
             <button
               onClick={() => setViewMode('grid')}
               className={`p-1.5 rounded-md transition-colors ${
@@ -222,7 +221,7 @@ export default function Header({ onToggleSidebar, onOpenSettings }: HeaderProps)
         {/* Settings Toggle */}
         <button
           onClick={onOpenSettings}
-          className="p-2 rounded-xl bg-surface-200/80 hover:bg-surface-300 border border-glass-border text-surface-600 hover:text-surface-700 transition-colors"
+          className="p-2 rounded-xl glass-neumorphic-raised text-surface-600 hover:text-surface-700 transition-all hover:scale-[1.04] active:scale-[0.96]"
           title="Open Settings & Analytics"
         >
           <Settings className="w-4 h-4" />
@@ -231,7 +230,7 @@ export default function Header({ onToggleSidebar, onOpenSettings }: HeaderProps)
         {/* Theme Toggle */}
         <button
           onClick={toggleTheme}
-          className="p-2 rounded-xl bg-surface-200/80 hover:bg-surface-300 border border-glass-border text-surface-600 hover:text-surface-700 transition-colors"
+          className="p-2 rounded-xl glass-neumorphic-raised text-surface-600 hover:text-surface-700 transition-all hover:scale-[1.04] active:scale-[0.96]"
           title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
         >
           {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
