@@ -57,6 +57,28 @@ export default function Header({ onToggleSidebar, onOpenSettings }: HeaderProps)
   } = useLinkMindStore();
 
   const searchRef = useRef<HTMLInputElement>(null);
+  const autoSwitchedRef = useRef(false);
+
+  // Handle auto-switching viewMode when searching from home
+  useEffect(() => {
+    if (filters.search && viewMode === 'home') {
+      autoSwitchedRef.current = true;
+      setViewMode('grid');
+    } else if (!filters.search && autoSwitchedRef.current && (viewMode === 'grid' || viewMode === 'list')) {
+      setViewMode('home');
+      autoSwitchedRef.current = false;
+    }
+  }, [filters.search, viewMode, setViewMode]);
+
+  // If the user manually changes viewMode away from library while search is active,
+  // we reset the autoSwitched flag so we don't unexpectedly jump back to home later.
+  useEffect(() => {
+    if (viewMode !== 'grid' && viewMode !== 'list') {
+      if (viewMode !== 'home' || !filters.search) {
+        autoSwitchedRef.current = false;
+      }
+    }
+  }, [viewMode, filters.search]);
 
   // Cmd/Ctrl+K and "/" focus search
   useEffect(() => {

@@ -129,9 +129,10 @@ function App() {
             {viewMode === 'home' ? (
               <motion.div
                 key="home"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                initial={{ opacity: 0, y: 12, scale: 0.985 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -12, scale: 0.985 }}
+                transition={{ type: 'spring', stiffness: 350, damping: 28 }}
                 className="flex-1 overflow-y-auto"
               >
                 <HomeScreen />
@@ -139,9 +140,10 @@ function App() {
             ) : viewMode === 'mindmap' ? (
               <motion.div
                 key="mindmap"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                initial={{ opacity: 0, y: 12, scale: 0.985 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -12, scale: 0.985 }}
+                transition={{ type: 'spring', stiffness: 350, damping: 28 }}
                 className="flex-1 flex flex-col relative w-full h-full"
               >
                 <MindMap />
@@ -149,9 +151,10 @@ function App() {
             ) : viewMode === 'chatbot' ? (
               <motion.div
                 key="chatbot"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                initial={{ opacity: 0, y: 12, scale: 0.985 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -12, scale: 0.985 }}
+                transition={{ type: 'spring', stiffness: 350, damping: 28 }}
                 className="flex-1 flex flex-col relative w-full h-full"
               >
                 <AIChatbot />
@@ -159,9 +162,10 @@ function App() {
             ) : (
               <motion.div
                 key="dashboard"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                initial={{ opacity: 0, y: 12, scale: 0.985 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -12, scale: 0.985 }}
+                transition={{ type: 'spring', stiffness: 350, damping: 28 }}
                 className="flex-1 overflow-y-auto"
               >
                 <Dashboard />

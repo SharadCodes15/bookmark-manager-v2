@@ -75,7 +75,7 @@ export default function ContextMenu({
       label: 'Open Link',
       icon: <ExternalLink size={14} />,
       action: () => {
-        window.open(bookmark.url, '_blank');
+        window.open(bookmark.url, '_blank', 'noopener,noreferrer');
         onClose();
       },
     },

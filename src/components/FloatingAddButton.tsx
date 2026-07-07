@@ -9,7 +9,10 @@ export default function FloatingAddButton() {
     <motion.button
       onClick={openAddModal}
       className="fixed bottom-6 right-6 z-30 w-14 h-14 rounded-2xl bg-gradient-to-br from-accent-primary to-accent-primary-dark text-white flex items-center justify-center group glass-neumorphic-raised border-none"
-      whileHover={{ scale: 1.1 }}
+      whileHover={{
+        scale: 1.1,
+        boxShadow: '0 0 25px rgba(99, 102, 241, 0.55)',
+      }}
       whileTap={{ scale: 0.95 }}
       title="Add new link (Ctrl+N)"
     >

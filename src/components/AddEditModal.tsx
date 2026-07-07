@@ -73,8 +73,8 @@ function domainToTitle(domain: string): string {
 
 function isValidUrl(value: string): boolean {
   try {
-    new URL(value);
-    return true;
+    const url = new URL(value);
+    return url.protocol === 'http:' || url.protocol === 'https:';
   } catch {
     return false;
   }
@@ -285,7 +285,7 @@ export default function AddEditModal() {
 
   // ── Save ────────────────────────────────────────────────────────
   const handleSave = useCallback(async () => {
-    if (!url.trim() || !title.trim()) return;
+    if (!url.trim() || !title.trim() || !isValidUrl(url)) return;
     setIsSaving(true);
     try {
       const payload = {
@@ -744,7 +744,7 @@ export default function AddEditModal() {
                 </button>
                 <button
                   type="button"
-                  disabled={!url.trim() || !title.trim() || isSaving}
+                  disabled={!url.trim() || !title.trim() || !urlValid || isSaving}
                   onClick={() => void handleSave()}
                   className="relative overflow-hidden rounded-xl bg-gradient-to-r from-accent-primary to-accent-secondary px-6 py-2 text-sm font-semibold text-white transition-all glass-neumorphic-raised hover:scale-[1.04] active:scale-[0.96] disabled:opacity-40"
                 >

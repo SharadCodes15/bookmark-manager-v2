@@ -60,7 +60,7 @@ export default function BookmarkCard({
     ) {
       return;
     }
-    window.open(bookmark.url, '_blank');
+    window.open(bookmark.url, '_blank', 'noopener,noreferrer');
   };
 
   const handleContextMenu = (e: React.MouseEvent) => {

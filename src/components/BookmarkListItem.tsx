@@ -145,7 +145,7 @@ export default function BookmarkListItem({
         <button
           onClick={(e) => {
             e.stopPropagation();
-            window.open(bookmark.url, '_blank');
+            window.open(bookmark.url, '_blank', 'noopener,noreferrer');
           }}
           className="p-1.5 rounded-lg hover:bg-surface-300 text-surface-600 hover:text-surface-900 transition-colors"
           aria-label="Open link"

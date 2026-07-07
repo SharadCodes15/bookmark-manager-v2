@@ -417,12 +417,89 @@ export const useLinkMindStore = create<LinkMindState>((set, get) => ({
 
   async importData(data) {
     try {
+      if (!data || typeof data !== 'object') {
+        throw new Error('Import data must be a valid JSON object');
+      }
+
       const { bookmarks: existing, collections: existingCols } = get();
       const existingBookmarkIds = new Set(existing.map((b) => b.id));
       const existingCollectionIds = new Set(existingCols.map((c) => c.id));
 
-      const newBookmarks = data.bookmarks.filter((b) => !existingBookmarkIds.has(b.id));
-      const newCollections = data.collections.filter((c) => !existingCollectionIds.has(c.id));
+      const rawBookmarks = Array.isArray(data.bookmarks) ? data.bookmarks : [];
+      const rawCollections = Array.isArray(data.collections) ? data.collections : [];
+
+      // Validate collections
+      const validatedCollections = rawCollections.filter((c: any) => {
+        return (
+          c &&
+          typeof c === 'object' &&
+          typeof c.id === 'string' && c.id.trim() !== '' &&
+          typeof c.name === 'string' && c.name.trim() !== '' &&
+          typeof c.color === 'string' && c.color.trim() !== '' &&
+          typeof c.createdAt === 'number'
+        );
+      }).map((c: any) => ({
+        id: c.id.trim(),
+        name: c.name.trim(),
+        color: c.color.trim(),
+        createdAt: c.createdAt,
+      }));
+
+      const validCollectionIds = new Set(validatedCollections.map(c => c.id));
+      existingCols.forEach(c => validCollectionIds.add(c.id));
+
+      // Validate bookmarks
+      const validatedBookmarks = rawBookmarks.filter((b: any) => {
+        if (!b || typeof b !== 'object') return false;
+        if (typeof b.id !== 'string' || b.id.trim() === '') return false;
+        if (typeof b.title !== 'string' || b.title.trim() === '') return false;
+        
+        // URL validation (must be http/https)
+        if (typeof b.url !== 'string') return false;
+        try {
+          const parsedUrl = new URL(b.url);
+          if (parsedUrl.protocol !== 'http:' && parsedUrl.protocol !== 'https:') return false;
+        } catch {
+          return false;
+        }
+
+        // Category validation
+        if (b.category !== 'Project' && b.category !== 'Area' && b.category !== 'Resource') return false;
+
+        // Status validation
+        if (b.status !== 'Active' && b.status !== 'Idle' && b.status !== 'To Read') return false;
+
+        // Collection link validation
+        if (b.collectionId !== undefined && b.collectionId !== null) {
+          if (typeof b.collectionId !== 'string' || !validCollectionIds.has(b.collectionId)) {
+            b.collectionId = undefined;
+          }
+        }
+
+        // Tags validation
+        if (!Array.isArray(b.tags)) return false;
+
+        return true;
+      }).map((b: any) => {
+        return {
+          id: b.id.trim(),
+          url: b.url.trim(),
+          title: b.title.trim(),
+          category: b.category,
+          status: b.status,
+          tags: b.tags.filter((t: any) => typeof t === 'string').map((t: string) => t.trim().toLowerCase()),
+          collectionId: b.collectionId || undefined,
+          createdAt: typeof b.createdAt === 'number' ? b.createdAt : Date.now(),
+          pinned: typeof b.pinned === 'boolean' ? b.pinned : false,
+          notes: typeof b.notes === 'string' ? b.notes.trim() : undefined,
+          faviconUrl: typeof b.faviconUrl === 'string' && b.faviconUrl.trim() !== '' 
+            ? b.faviconUrl.trim() 
+            : getFaviconUrl(b.url),
+        };
+      });
+
+      const newBookmarks = validatedBookmarks.filter((b) => !existingBookmarkIds.has(b.id));
+      const newCollections = validatedCollections.filter((c) => !existingCollectionIds.has(c.id));
 
       if (newBookmarks.length > 0) {
         await db.bookmarks.bulkAdd(newBookmarks);
@@ -438,9 +515,18 @@ export const useLinkMindStore = create<LinkMindState>((set, get) => ({
       ]);
       set({ bookmarks: allBookmarks, collections: allCollections });
 
-      toast.success(
-        `Imported ${newBookmarks.length} bookmark(s) and ${newCollections.length} collection(s)`,
-      );
+      const skippedBookmarksCount = rawBookmarks.length - validatedBookmarks.length;
+      const skippedCollectionsCount = rawCollections.length - validatedCollections.length;
+
+      if (skippedBookmarksCount > 0 || skippedCollectionsCount > 0) {
+        toast.success(
+          `Imported ${newBookmarks.length} bookmark(s) and ${newCollections.length} collection(s) (${skippedBookmarksCount} invalid bookmark(s) and ${skippedCollectionsCount} invalid collection(s) skipped)`
+        );
+      } else {
+        toast.success(
+          `Imported ${newBookmarks.length} bookmark(s) and ${newCollections.length} collection(s)`
+        );
+      }
     } catch (err) {
       console.error('Failed to import data', err);
       toast.error('Failed to import data');
